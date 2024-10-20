@@ -104,7 +104,7 @@ void stackPop(const request& request){
             Stack<string> currVar = splitToStack(var.data); //определяем реальную переменную этого Типа данных
             currVar.pop(); //удаляем
             variableLine = var.name + ';' + unSplitStack(currVar);//превращаем переменную в текст
-            if (currVar.head == nullptr){
+            if (currVar.head != nullptr){
                 tmpFile << variableLine << endl;
             }
             currVar.clear();
