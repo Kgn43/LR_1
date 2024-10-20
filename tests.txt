@@ -1,0 +1,60 @@
+/*
+    list<string> ls;
+    ls.backInsert("9");
+    ls.headInsert("5");
+    ls.headInsert("3");
+    ls.headInsert("1");
+    ls.headInsert("0");
+    cout << ls << endl;
+    ls.delByVal("1");
+    cout << ls << endl;
+    ls.delLast();
+    cout << ls << endl;
+    ls.delFirst();
+    cout << ls << endl;
+*/
+
+/*
+    Stack<string> st;
+    st.push("1");
+    st.push("2");
+    st.push("3");
+    st.pop();
+    cout << st << endl;
+*/
+
+/*
+    //очередь
+    queue<int> q;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.push(4);
+    cout << q << endl;
+    q.pop();
+    cout << q << endl;
+    q.pop();
+    cout << q << endl;
+    cout << q.getFirst() << endl;
+*/
+
+hashMap h;
+    cout << h << endl;
+    h.insert("1", "one");
+    cout << h << endl;
+    h.insert("2", "two");
+    cout << h << endl;
+    h.insert("3", "three");
+    cout << h << endl;
+    h.insert("4", "fore");
+    cout << h << endl;
+    h.insert("5", "five");
+    cout << h << endl;
+    h.insert("6", "six");
+    cout << h << endl;
+    h.insert("7", "seven");
+    cout << h << endl;
+    h.del("1");
+    cout << h << endl;
+    cout << h.Get("4") << endl;
+
