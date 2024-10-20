@@ -7,9 +7,9 @@ using namespace std;
 
 template <typename T>
 struct arr {
-    T* data;      // Указатель на динамический массив
-    size_t size;  // Текущий размер "вектора"
-    size_t capacity; // Вместимость "вектора"
+    T* data;
+    size_t size;
+    size_t capacity;
 
     //конструктор
     arr<T>() : data(nullptr), size(0), capacity(0) {}
@@ -19,7 +19,7 @@ struct arr {
         data = new T[capacity];  // Выделение памяти под массив
         // Инициализация массива значениями по умолчанию
         for (size_t i = 0; i < size; ++i) {
-            data[i] = T(); // Или использовать явное значение, если нужно
+            data[i] = T();
         }
     }
 

@@ -42,17 +42,8 @@ void printList(const request& request){
 void listPush(const request& request){
 //структура команды: push им€—писка куда«аписать что«аписать
     fstream file(request.file, ios::in);
-    if(!file.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
     fstream tmpFile("tmp.data", ios::out);
-    if(!tmpFile.is_open()){
-        stringstream serr;
-        serr << "Tmp file doesn't exist";
-        throw runtime_error(serr.str());
-    }
+    if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
     if (request.query.size != 4) {
         stringstream serr;
         serr << "Wrong command syntax";
@@ -112,17 +103,8 @@ void listPush(const request& request){
 void listDel(const request& request){
 //команда: pop им€—писка откуда/по акому«начению
     fstream file(request.file, ios::in);
-    if(!file.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
     fstream tmpFile("tmp.data", ios::out);
-    if(!tmpFile.is_open()){
-        stringstream serr;
-        serr << "Tmp file doesn't exist";
-        throw runtime_error(serr.str());
-    }
+    if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
     if (request.query.size != 3) {
         stringstream serr;
         serr << "Wrong command syntax";
@@ -151,7 +133,9 @@ void listDel(const request& request){
             }
             variableLine = var.name + ';' + unSplitList(currVar);//превращаем переменную в текст
             //currVar.clear();
-            tmpFile << variableLine << endl;
+            if (currVar.first != nullptr){
+                tmpFile << variableLine << endl;
+            }
         }
         else {
             tmpFile << variableLine << endl;

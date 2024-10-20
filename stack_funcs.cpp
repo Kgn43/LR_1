@@ -42,22 +42,9 @@ void printStack(const request& request){
 void stackPush(const request& request){
 //структура команды: push им€—тека что«аписать
     fstream file(request.file, ios::in);
-    if(!file.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
     fstream tmpFile("tmp.data", ios::out);
-    if(!tmpFile.is_open()){
-        stringstream serr;
-        serr << "Tmp file doesn't exist";
-        throw runtime_error(serr.str());
-    }
-    if (request.query.size != 3) {
-        stringstream serr;
-        serr << "Wrong command syntax";
-        throw runtime_error(serr.str());
-    }
+    if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
+    if (request.query.size != 3) throw runtime_error("Wrong command syntax");
     string name = request.query[1];
     string value = request.query[2]; //что записать
     string variableLine; //считываема€ строка с файла
@@ -101,22 +88,9 @@ void stackPush(const request& request){
 void stackPop(const request& request){
 //команда: pop им€—тека
     fstream file(request.file, ios::in);
-    if(!file.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
     fstream tmpFile("tmp.data", ios::out);
-    if(!tmpFile.is_open()){
-        stringstream serr;
-        serr << "Tmp file doesn't exist";
-        throw runtime_error(serr.str());
-    }
-    if (request.query.size != 2) {
-        stringstream serr;
-        serr << "Wrong command syntax";
-        throw runtime_error(serr.str());
-    }
+    if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
+    if (request.query.size != 2) throw runtime_error("Wrong command syntax");
     string name = request.query[1];
     string variableLine; //считываема€ строка с файла
     fileData var;
@@ -130,8 +104,10 @@ void stackPop(const request& request){
             Stack<string> currVar = splitToStack(var.data); //определ€ем реальную переменную этого “ипа данных
             currVar.pop(); //удал€ем
             variableLine = var.name + ';' + unSplitStack(currVar);//превращаем переменную в текст
+            if (currVar.head == nullptr){
+                tmpFile << variableLine << endl;
+            }
             currVar.clear();
-            tmpFile << variableLine << endl;
         }
         else {
             tmpFile << variableLine << endl;
@@ -156,16 +132,7 @@ void stackPop(const request& request){
 void stackGet(const request& request){
 //структура команды: get им€—тека
     fstream file(request.file, ios::in);
-    if(!file.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
-    if (request.query.size != 2) {
-        stringstream serr;
-        serr << "Wrong command syntax";
-        throw runtime_error(serr.str());
-    }
+    if (request.query.size != 2) throw runtime_error("Wrong command syntax");
     string name = request.query[1]; //из какого стека считать
     string variableLine; //считываема€ строка с файла
     fileData var;

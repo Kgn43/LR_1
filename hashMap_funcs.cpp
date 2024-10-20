@@ -106,7 +106,9 @@ void hashSetDel(const request& request){
             hashMap currVar = hMFromStr(var.data); //определяем реальную переменную этого Типа данных
             currVar.del(key);
             variableLine = var.name + ';' + strFromHM(currVar);//превращаем переменную в текст
-            tmpFile << variableLine << endl;
+            if (currVar.pairCount != 0){
+                tmpFile << variableLine << endl;
+            }
         }
         else {
             tmpFile << variableLine << endl;
@@ -147,7 +149,7 @@ void hashSetGet(const request& request){
             }
         }
         if (!varIsExist){
-            cout << "This queue isn't exist" << endl;
+            cout << "This hashMap isn't exist" << endl;
         }
     }
     else if (request.query.size == 3){
@@ -175,7 +177,7 @@ void hashSetGet(const request& request){
             }
         }
         if (!varIsExist){
-            cout << "This queue isn't exist" << endl;
+            cout << "This hashMap isn't exist" << endl;
         }
     }
     else throw runtime_error("Wrong command syntax");

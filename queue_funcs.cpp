@@ -42,22 +42,9 @@ void printQueue(const request& request){
 void queuePush(const request& request){
 //структура команды: push им€ќчереди что«аписать
     fstream file(request.file, ios::in);
-    if(!file.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
     fstream tmpFile("tmp.data", ios::out);
-    if(!tmpFile.is_open()){
-        stringstream serr;
-        serr << "Tmp file doesn't exist";
-        throw runtime_error(serr.str());
-    }
-    if (request.query.size != 3) {
-        stringstream serr;
-        serr << "Wrong command syntax";
-        throw runtime_error(serr.str());
-    }
+    if(!tmpFile.is_open()) throw runtime_error( "Tmp file doesn't exist");
+    if (request.query.size != 3) throw runtime_error("Wrong command syntax");
     string name = request.query[1]; //им€ очереди
     string value = request.query[2]; //что записать
     string variableLine; //считываема€ строка с файла
@@ -101,22 +88,9 @@ void queuePush(const request& request){
 void queuePop(const request& request){
 //команда: pop им€ќчереди
     fstream file(request.file, ios::in);
-    if(!file.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
     fstream tmpFile("tmp.data", ios::out);
-    if(!tmpFile.is_open()){
-        stringstream serr;
-        serr << "Tmp file doesn't exist";
-        throw runtime_error(serr.str());
-    }
-    if (request.query.size != 2) {
-        stringstream serr;
-        serr << "Wrong command syntax";
-        throw runtime_error(serr.str());
-    }
+    if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
+    if (request.query.size != 2) throw runtime_error("Wrong command syntax");
     string name = request.query[1]; //им€ очереди
     string variableLine; //считываема€ строка с файла
     fileData var;
@@ -131,7 +105,9 @@ void queuePop(const request& request){
             currVar.pop();
             variableLine = var.name + ';' + unSplitQueue(currVar);//превращаем переменную в текст
             currVar.clear();
-            tmpFile << variableLine << endl;
+            if (currVar.head == nullptr){
+                tmpFile << variableLine << endl;
+            }
         }
         else {
             tmpFile << variableLine << endl;
@@ -156,16 +132,7 @@ void queuePop(const request& request){
 void queueGet(const request& request){
 //структура команды: get им€ќчереди
     fstream file(request.file, ios::in);
-    if(!file.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
-    if (request.query.size != 2) {
-        stringstream serr;
-        serr << "Wrong command syntax";
-        throw runtime_error(serr.str());
-    }
+    if (request.query.size != 2) throw runtime_error("Wrong command syntax");
     string name = request.query[1]; //в какой очереди искать
     string variableLine; //считываема€ строка с файла
     fileData var;

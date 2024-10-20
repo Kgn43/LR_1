@@ -118,17 +118,9 @@ void arrPush(const request& request){
 void arrDel(const request& request){
 //структура команды: del им€ћассива индекс
     fstream file(request.file, ios::in);
-    if(!file.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
     fstream tmpFile("tmp.data", ios::out);
-    if(!tmpFile.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
+    if(!tmpFile.is_open()) throw runtime_error("tmp.data file doesn't exist");
+    if (request.query.size != 3) throw runtime_error("wrong command syntax");
     string name = request.query[1]; //из какого массива удал€ть
     size_t index = stoi(request.query[2]); //с какой позиции
     string variableLine; //считываема€ строка с файла
@@ -171,11 +163,7 @@ void arrDel(const request& request){
 void arrGet(const request& request){
 //структура команды: get им€ћассива индекс
     fstream file(request.file, ios::in);
-    if(!file.is_open()){
-        stringstream serr;
-        serr << "This file doesn't exist";
-        throw runtime_error(serr.str());
-    }
+    if (request.query.size != 3) throw runtime_error("wrong command syntax");
     string name = request.query[1]; //из какого массива считать
     size_t index = stoi(request.query[2]); //с какой позиции
     string variableLine; //считываема€ строка с файла
@@ -190,7 +178,6 @@ void arrGet(const request& request){
             arr<string> currVar = splitToArr(var.data); //определ€ем реальную переменную этого “ипа данных
             if (index < currVar.size) cout << currVar[index] << endl;
             else cout << "Index out of range" << endl;
-            //currVar.clear();
         }
     }
     if (!varIsExist){
