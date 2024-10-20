@@ -2,29 +2,29 @@
 
 
 void printStack(const request& request){
-    ifstream file(request.file, ios::in); //откуда читаем
-    string variableLine; //считываемая строка с файла
-    if (request.query.size == 1){ //вывести все переменные
+    ifstream file(request.file, ios::in); //РѕС‚РєСѓРґР° С‡РёС‚Р°РµРј
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
+    if (request.query.size == 1){ //РІС‹РІРµСЃС‚Рё РІСЃРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         fileData var;
-        while (getline(file, variableLine)) { //проверяем все существующие переменные
+        while (getline(file, variableLine)) { //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
             if (variableLine == " " || variableLine.empty()) continue;
-            var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-            var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-            Stack<string> currVar = splitToStack(var.data); //определяем реальную переменную этого Типа данных
+            var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+            var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+            Stack<string> currVar = splitToStack(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
             cout << var.name << " = " << currVar << endl;
         }
     }
-    else if (request.query.size == 2) { //вывести одну переменную
-        string name = request.query[1]; //имя искомой переменной
+    else if (request.query.size == 2) { //РІС‹РІРµСЃС‚Рё РѕРґРЅСѓ РїРµСЂРµРјРµРЅРЅСѓСЋ
+        string name = request.query[1]; //РёРјСЏ РёСЃРєРѕРјРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№
         fileData var;
         bool varIsExist = false;
-        while (getline(file, variableLine)){ //проверяем все существующие переменные
+        while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
             if (variableLine == " " || variableLine.empty()) continue;
-            var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-            var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-            if (var.name == name){ //если такая переменная существует
-                varIsExist = true; //закрываем защёлку
-                Stack<string> currVar = splitToStack(var.data); //определяем реальную переменную этого Типа данных
+            var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+            var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+            if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+                varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+                Stack<string> currVar = splitToStack(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
                 cout << var.name << " = " << currVar << endl;
             }
         }
@@ -40,26 +40,26 @@ void printStack(const request& request){
 
 
 void stackPush(const request& request){
-//структура команды: push имяСтека чтоЗаписать
+//СЃС‚СЂСѓРєС‚СѓСЂР° РєРѕРјР°РЅРґС‹: push РёРјСЏРЎС‚РµРєР° С‡С‚РѕР—Р°РїРёСЃР°С‚СЊ
     fstream file(request.file, ios::in);
     fstream tmpFile("tmp.data", ios::out);
     if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
     if (request.query.size != 3) throw runtime_error("Wrong command syntax");
     string name = request.query[1];
-    string value = request.query[2]; //что записать
-    string variableLine; //считываемая строка с файла
+    string value = request.query[2]; //С‡С‚Рѕ Р·Р°РїРёСЃР°С‚СЊ
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
     fileData var;
     bool varIsExist = false;
-    while (getline(file, variableLine)){ //проверяем все существующие переменные
+    while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         if (variableLine == " " || variableLine.empty()) continue;
-        var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-        var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-        if (var.name == name){ //если такая переменная существует
-            varIsExist = true; //закрываем защёлку
-            Stack<string> currVar = splitToStack(var.data); //определяем реальную переменную этого Типа данных
-            currVar.push(value); //закидываем то, что просят в конец
-            variableLine = var.name + ';' + unSplitStack(currVar);//превращаем переменную в текст
-            currVar.clear();//никаких утечек!
+        var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+        var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+        if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+            varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+            Stack<string> currVar = splitToStack(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
+            currVar.push(value); //Р·Р°РєРёРґС‹РІР°РµРј С‚Рѕ, С‡С‚Рѕ РїСЂРѕСЃСЏС‚ РІ РєРѕРЅРµС†
+            variableLine = var.name + ';' + unSplitStack(currVar);//РїСЂРµРІСЂР°С‰Р°РµРј РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С‚РµРєСЃС‚
+            currVar.clear();//РЅРёРєР°РєРёС… СѓС‚РµС‡РµРє!
             tmpFile << variableLine << endl;
         }
         else {
@@ -68,9 +68,9 @@ void stackPush(const request& request){
     }
     if (!varIsExist){
         cout << "making new Stack" << endl;
-        Stack<string> newVar;//да, делаем это всегда.
+        Stack<string> newVar;//РґР°, РґРµР»Р°РµРј СЌС‚Рѕ РІСЃРµРіРґР°.
         newVar.push(value);
-        variableLine = name + ';' + unSplitStack(newVar);//превращаем переменную в текст
+        variableLine = name + ';' + unSplitStack(newVar);//РїСЂРµРІСЂР°С‰Р°РµРј РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С‚РµРєСЃС‚
         tmpFile << variableLine;
     }
     file.close();
@@ -86,24 +86,24 @@ void stackPush(const request& request){
 
 
 void stackPop(const request& request){
-//команда: pop имяСтека
+//РєРѕРјР°РЅРґР°: pop РёРјСЏРЎС‚РµРєР°
     fstream file(request.file, ios::in);
     fstream tmpFile("tmp.data", ios::out);
     if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
     if (request.query.size != 2) throw runtime_error("Wrong command syntax");
     string name = request.query[1];
-    string variableLine; //считываемая строка с файла
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
     fileData var;
     bool varIsExist = false;
-    while (getline(file, variableLine)){ //проверяем все существующие переменные
+    while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         if (variableLine == " " || variableLine.empty()) continue;
-        var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-        var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-        if (var.name == name){ //если такая переменная существует
-            varIsExist = true; //закрываем защёлку
-            Stack<string> currVar = splitToStack(var.data); //определяем реальную переменную этого Типа данных
-            currVar.pop(); //удаляем
-            variableLine = var.name + ';' + unSplitStack(currVar);//превращаем переменную в текст
+        var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+        var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+        if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+            varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+            Stack<string> currVar = splitToStack(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
+            currVar.pop(); //СѓРґР°Р»СЏРµРј
+            variableLine = var.name + ';' + unSplitStack(currVar);//РїСЂРµРІСЂР°С‰Р°РµРј РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С‚РµРєСЃС‚
             if (currVar.head == nullptr){
                 tmpFile << variableLine << endl;
             }
@@ -130,20 +130,20 @@ void stackPop(const request& request){
 
 
 void stackGet(const request& request){
-//структура команды: get имяСтека
+//СЃС‚СЂСѓРєС‚СѓСЂР° РєРѕРјР°РЅРґС‹: get РёРјСЏРЎС‚РµРєР°
     fstream file(request.file, ios::in);
     if (request.query.size != 2) throw runtime_error("Wrong command syntax");
-    string name = request.query[1]; //из какого стека считать
-    string variableLine; //считываемая строка с файла
+    string name = request.query[1]; //РёР· РєР°РєРѕРіРѕ СЃС‚РµРєР° СЃС‡РёС‚Р°С‚СЊ
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
     fileData var;
     bool varIsExist = false;
-    while (getline(file, variableLine)){ //проверяем все существующие переменные
+    while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         if (variableLine == " " || variableLine.empty()) continue;
-        var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-        var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-        if (var.name == name){ //если такая переменная существует
-            varIsExist = true; //закрываем защёлку
-            Stack<string> currVar = splitToStack(var.data); //определяем реальную переменную этого Типа данных
+        var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+        var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+        if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+            varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+            Stack<string> currVar = splitToStack(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
             cout << currVar.getLast() << endl;
             currVar.clear();
         }

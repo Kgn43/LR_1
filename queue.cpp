@@ -2,7 +2,7 @@
 
 
 template<typename T>
-void queue<T>::push(T val) {// вставляем в хвост
+void queue<T>::push(T val) {// РІСЃС‚Р°РІР»СЏРµРј РІ С…РІРѕСЃС‚
     Node<T>* newElement = new Node{val};
     if (this->head == nullptr) {
         this->head = newElement;
@@ -15,7 +15,7 @@ void queue<T>::push(T val) {// вставляем в хвост
 }
 
 template<typename T>
-void queue<T>::pop() { //удаляем с головы
+void queue<T>::pop() { //СѓРґР°Р»СЏРµРј СЃ РіРѕР»РѕРІС‹
     if (this->head == nullptr) return;
     auto tmpHead = this->head;
     this->head = this->head->next;

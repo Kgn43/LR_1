@@ -10,10 +10,10 @@ public:
     T value;
     Node* next;
 
-    //конструкторы
+    //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹
     Node(T val, Node* following) : value(val), next(following) {}
     Node(T val) : value(val), next(nullptr) {}
-    Node() : value(T()), next(nullptr){} //не уверен, но тут могут возникать ошибки, если нет конструктора по умолчанию для АТД
+    Node() : value(T()), next(nullptr){} //РЅРµ СѓРІРµСЂРµРЅ, РЅРѕ С‚СѓС‚ РјРѕРіСѓС‚ РІРѕР·РЅРёРєР°С‚СЊ РѕС€РёР±РєРё, РµСЃР»Рё РЅРµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ РђРўР”
 };
 
 template struct Node<int>;

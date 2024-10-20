@@ -11,13 +11,13 @@ struct arr {
     size_t size;
     size_t capacity;
 
-    //конструктор
+    //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
     arr<T>() : data(nullptr), size(0), capacity(0) {}
 
-    // Конструктор с заданной длиной
+    // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ Р·Р°РґР°РЅРЅРѕР№ РґР»РёРЅРѕР№
     arr<T>(size_t length) : size(length), capacity(length) {
-        data = new T[capacity];  // Выделение памяти под массив
-        // Инициализация массива значениями по умолчанию
+        data = new T[capacity];  // Р’С‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё РїРѕРґ РјР°СЃСЃРёРІ
+        // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РјР°СЃСЃРёРІР° Р·РЅР°С‡РµРЅРёСЏРјРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
         for (size_t i = 0; i < size; ++i) {
             data[i] = T();
         }
@@ -32,7 +32,7 @@ struct arr {
     void clear();
 
 
-    // Перегрузка оператора вывода
+    // РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РІС‹РІРѕРґР°
     friend ostream& operator<<(ostream& os, const arr& arr) {
         os << "[";
         for (size_t i = 0; i < arr.size; ++i) {
@@ -45,7 +45,7 @@ struct arr {
         return os;
     }
 
-    // Метод для получения элемента по индексу
+    // РњРµС‚РѕРґ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р° РїРѕ РёРЅРґРµРєСЃСѓ
     T& operator[](size_t index) const {
         if (index >= size) {
             throw std::out_of_range("Index out of range");

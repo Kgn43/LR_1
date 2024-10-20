@@ -10,9 +10,9 @@ struct queue{
     Node<T>* head;
     Node<T>* tail;
 
-    queue() : head(nullptr), tail(nullptr) {} //конструктор
+    queue() : head(nullptr), tail(nullptr) {} //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 
-    //методы
+    //РјРµС‚РѕРґС‹
     void push(T val);
     void pop();
     T getFirst();

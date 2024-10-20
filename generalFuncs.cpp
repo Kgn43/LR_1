@@ -1,6 +1,6 @@
 #include "generalFuncs.h"
 
-void callHelp(){ //я слишком поздно понял, что можно было написать батник))) ну, пусть будет так
+void callHelp(){ //СЏ СЃР»РёС€РєРѕРј РїРѕР·РґРЅРѕ РїРѕРЅСЏР», С‡С‚Рѕ РјРѕР¶РЅРѕ Р±С‹Р»Рѕ РЅР°РїРёСЃР°С‚СЊ Р±Р°С‚РЅРёРє))) РЅСѓ, РїСѓСЃС‚СЊ Р±СѓРґРµС‚ С‚Р°Рє
 
     std::cout << std::endl << std::endl << "add --file FileName --query 'your query'" << std::endl << std::endl << std::endl << std::endl;
 
@@ -37,8 +37,8 @@ void callHelp(){ //я слишком поздно понял, что можно было написать батник))) ну,
     std::cout << "push:" << std::endl;
     std::cout << "\t\'Lpush listName begin/end value\'  - insert value at the begin/end of list" << std::endl;
 
-    std::cout << "pop:" << std::endl;
-    std::cout << "\t\'Lpop listName value/begin/end\'  - delete element from begin/end or delete by value" << std::endl;
+    std::cout << "del:" << std::endl;
+    std::cout << "\t\'Ldel listName value/begin/end\'  - delete element from begin/end or delete by value" << std::endl;
 
     std::cout << "get:" << std::endl;
     std::cout << "\t\'LGet listName searchedValue\'  - determine if there is an element with this value in the list" << std::endl;
@@ -131,8 +131,8 @@ request getRequest(int argc, char *argv[] ){
             return output;
         }
         if (static_cast<string>(argv[i]) == "--file") {
-            //если после флага ничего нет || если после флага другой флаг
-            if (i + 1 == argc || argv[i + 1][0] == '-') { //Если первое условие выполняется - второе не приведёт к ошибке т.к. не будет проверяться
+            //РµСЃР»Рё РїРѕСЃР»Рµ С„Р»Р°РіР° РЅРёС‡РµРіРѕ РЅРµС‚ || РµСЃР»Рё РїРѕСЃР»Рµ С„Р»Р°РіР° РґСЂСѓРіРѕР№ С„Р»Р°Рі
+            if (i + 1 == argc || argv[i + 1][0] == '-') { //Р•СЃР»Рё РїРµСЂРІРѕРµ СѓСЃР»РѕРІРёРµ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ - РІС‚РѕСЂРѕРµ РЅРµ РїСЂРёРІРµРґС‘С‚ Рє РѕС€РёР±РєРµ С‚.Рє. РЅРµ Р±СѓРґРµС‚ РїСЂРѕРІРµСЂСЏС‚СЊСЃСЏ
                 throw runtime_error(("Error: empty query.\n Specify what to execute"));
             } else {
                 output.file = argv[i + 1];
@@ -140,7 +140,7 @@ request getRequest(int argc, char *argv[] ){
             }
         }
         if (static_cast<string>(argv[i]) == "--query") {
-            if (i + 1 == argc || argv[i + 1][0] == '-') { //если после флага ничего нет || если после флага другой флаг
+            if (i + 1 == argc || argv[i + 1][0] == '-') { //РµСЃР»Рё РїРѕСЃР»Рµ С„Р»Р°РіР° РЅРёС‡РµРіРѕ РЅРµС‚ || РµСЃР»Рё РїРѕСЃР»Рµ С„Р»Р°РіР° РґСЂСѓРіРѕР№ С„Р»Р°Рі
                 throw runtime_error(("Error: empty query.\n Specify what to execute"));
             } else {
                 output.query = splitToArr(static_cast<string>(argv[i + 1]));

@@ -10,7 +10,7 @@ template<typename T>
 struct sList {
     Node<T>* head;
 
-    sList() : head(nullptr) {} //конструктор
+    sList() : head(nullptr) {} //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 
 
     void headInsert(T value);

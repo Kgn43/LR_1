@@ -10,7 +10,7 @@ struct Stack{
     Node<T>* head;
 
 public:
-    Stack() : head(nullptr) {} //конструктор
+    Stack() : head(nullptr) {} //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 
 
     friend ostream& operator<<(ostream& os, const Stack<T>& st) {
@@ -27,7 +27,7 @@ public:
         return os;
     }
 
-    //методы
+    //РјРµС‚РѕРґС‹
     void push(T val);
     void pop();
     T getLast();

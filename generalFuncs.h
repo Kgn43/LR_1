@@ -29,7 +29,7 @@ enum structures{
 struct request{
     arr<string> query;
     string file;
-    bool isCallHelp = false; //проиграли бит, но выиграли больше на обработке запроса
+    bool isCallHelp = false; //РїСЂРѕРёРіСЂР°Р»Рё Р±РёС‚, РЅРѕ РІС‹РёРіСЂР°Р»Рё Р±РѕР»СЊС€Рµ РЅР° РѕР±СЂР°Р±РѕС‚РєРµ Р·Р°РїСЂРѕСЃР°
 };
 
 

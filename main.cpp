@@ -17,16 +17,16 @@ int main(int argc, char *argv[]) {
             return 1;
         }
         if (request.query[0] == "print"){
-            if (!isFileExist(request.file) || request.file.empty()){ //проверяем доступ указанного файла/указан ли файл
+            if (!isFileExist(request.file) || request.file.empty()){ //РїСЂРѕРІРµСЂСЏРµРј РґРѕСЃС‚СѓРї СѓРєР°Р·Р°РЅРЅРѕРіРѕ С„Р°Р№Р»Р°/СѓРєР°Р·Р°РЅ Р»Рё С„Р°Р№Р»
                 throw runtime_error(("Error: wrong file name or file doesn't exist"));
             }
             consolePrint(request);
         } else {
-            structures strucType = structRequest(request.query[0][0]); //определяем по букве структуру
-            if (!isFileExist(request.file) || request.file.empty()){ //проверяем доступ указанного файла/указан ли файл
+            structures strucType = structRequest(request.query[0][0]); //РѕРїСЂРµРґРµР»СЏРµРј РїРѕ Р±СѓРєРІРµ СЃС‚СЂСѓРєС‚СѓСЂСѓ
+            if (!isFileExist(request.file) || request.file.empty()){ //РїСЂРѕРІРµСЂСЏРµРј РґРѕСЃС‚СѓРї СѓРєР°Р·Р°РЅРЅРѕРіРѕ С„Р°Р№Р»Р°/СѓРєР°Р·Р°РЅ Р»Рё С„Р°Р№Р»
                 throw runtime_error(("Error: wrong file name or file doesn't exist"));
             }
-            request.query[0] = delFirstLetter(request.query[0]); //убираем букву для упрощения чтения команды
+            request.query[0] = delFirstLetter(request.query[0]); //СѓР±РёСЂР°РµРј Р±СѓРєРІСѓ РґР»СЏ СѓРїСЂРѕС‰РµРЅРёСЏ С‡С‚РµРЅРёСЏ РєРѕРјР°РЅРґС‹
             switch (strucType) {
                 case Array:
                     switch (commandRequest(request.query[0])) {

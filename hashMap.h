@@ -13,8 +13,8 @@ struct hashMap {
     size_t bucketCount;
     size_t pairCount;
 
-    hashMap(): pairCount(0), bucketCount(2), buckets(2){} //создаёт 4 бакета
-    hashMap(size_t num): pairCount(0), bucketCount(num), buckets(num){} //создаёт num бакетов
+    hashMap(): pairCount(0), bucketCount(2), buckets(2){} //СЃРѕР·РґР°С‘С‚ 4 Р±Р°РєРµС‚Р°
+    hashMap(size_t num): pairCount(0), bucketCount(num), buckets(num){} //СЃРѕР·РґР°С‘С‚ num Р±Р°РєРµС‚РѕРІ
 
     void insert(const string& key, const string& value);
     void insert(const Pair& input);

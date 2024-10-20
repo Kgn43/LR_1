@@ -2,30 +2,30 @@
 
 
 void printHashMap(const request &request) {
-    ifstream file(request.file, ios::in); //откуда читаем
-    string variableLine; //считываемая строка с файла
-    if (request.query.size == 1){ //вывести все переменные
+    ifstream file(request.file, ios::in); //РѕС‚РєСѓРґР° С‡РёС‚Р°РµРј
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
+    if (request.query.size == 1){ //РІС‹РІРµСЃС‚Рё РІСЃРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         fileData var;
-        while (getline(file, variableLine)) { //проверяем все существующие переменные
+        while (getline(file, variableLine)) { //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
             if (variableLine == " " || variableLine.empty()) continue;
-            var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-            var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-            //определяем реальную переменную этого Типа данных
+            var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+            var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+            //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
             hashMap currVar = hMFromStr(var.data);
             cout << var.name << " = " << currVar << endl;
         }
     }
-    else if (request.query.size == 2) { //вывести одну переменную
-        string name = request.query[1]; //имя искомой переменной
+    else if (request.query.size == 2) { //РІС‹РІРµСЃС‚Рё РѕРґРЅСѓ РїРµСЂРµРјРµРЅРЅСѓСЋ
+        string name = request.query[1]; //РёРјСЏ РёСЃРєРѕРјРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№
         fileData var;
         bool varIsExist = false;
-        while (getline(file, variableLine)){ //проверяем все существующие переменные
+        while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
             if (variableLine == " " || variableLine.empty()) continue;
-            var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-            var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-            if (var.name == name){ //если такая переменная существует
-                varIsExist = true; //закрываем защёлку
-                hashMap currVar = hMFromStr(var.data); //определяем реальную переменную этого Типа данных
+            var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+            var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+            if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+                varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+                hashMap currVar = hMFromStr(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
                 cout << var.name << " = " << currVar << endl;
             }
         }
@@ -41,26 +41,26 @@ void printHashMap(const request &request) {
 
 
 void hashSetInsert(const request& request){
-//структура команды: insert имяТаблицы ключ значение
+//СЃС‚СЂСѓРєС‚СѓСЂР° РєРѕРјР°РЅРґС‹: insert РёРјСЏРўР°Р±Р»РёС†С‹ РєР»СЋС‡ Р·РЅР°С‡РµРЅРёРµ
     fstream file(request.file, ios::in);
     fstream tmpFile("tmp.data", ios::out);
     if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
     if (request.query.size != 4) throw runtime_error("Wrong command syntax");
     string name = request.query[1];
-    string key = request.query[2]; //ключ
-    string value = request.query[3]; //значение
-    string variableLine; //считываемая строка с файла
+    string key = request.query[2]; //РєР»СЋС‡
+    string value = request.query[3]; //Р·РЅР°С‡РµРЅРёРµ
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
     fileData var;
     bool varIsExist = false;
-    while (getline(file, variableLine)){ //проверяем все существующие переменные
+    while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         if (variableLine == " " || variableLine.empty()) continue;
-        var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-        var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-        if (var.name == name){ //если такая переменная существует
-            varIsExist = true; //закрываем защёлку
-            hashMap currVar = hMFromStr(var.data); //определяем реальную переменную этого Типа данных
-            currVar.insert(key, value); //закидываем то, что просят
-            variableLine = var.name + ';' + strFromHM(currVar);//превращаем переменную в текст
+        var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+        var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+        if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+            varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+            hashMap currVar = hMFromStr(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
+            currVar.insert(key, value); //Р·Р°РєРёРґС‹РІР°РµРј С‚Рѕ, С‡С‚Рѕ РїСЂРѕСЃСЏС‚
+            variableLine = var.name + ';' + strFromHM(currVar);//РїСЂРµРІСЂР°С‰Р°РµРј РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С‚РµРєСЃС‚
             tmpFile << variableLine << endl;
         }
         else {
@@ -69,9 +69,9 @@ void hashSetInsert(const request& request){
     }
     if (!varIsExist){
         cout << "making new HashMap" << endl;
-        hashMap newVar;//да, делаем это всегда.
+        hashMap newVar;//РґР°, РґРµР»Р°РµРј СЌС‚Рѕ РІСЃРµРіРґР°.
         newVar.insert(key, value);
-        variableLine = name + ';' + strFromHM(newVar);//превращаем переменную в текст
+        variableLine = name + ';' + strFromHM(newVar);//РїСЂРµРІСЂР°С‰Р°РµРј РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С‚РµРєСЃС‚
         tmpFile << variableLine;
     }
     file.close();
@@ -87,25 +87,25 @@ void hashSetInsert(const request& request){
 
 
 void hashSetDel(const request& request){
-    //команда: del имяТаблицы ключ
+    //РєРѕРјР°РЅРґР°: del РёРјСЏРўР°Р±Р»РёС†С‹ РєР»СЋС‡
     fstream tmpFile("tmp.data", ios::out);
     if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
     fstream file(request.file, ios::in);
     if (request.query.size != 3) throw runtime_error("Wrong command syntax");
-    string name = request.query[1]; //имя очереди
+    string name = request.query[1]; //РёРјСЏ РѕС‡РµСЂРµРґРё
     string key = request.query[2];
-    string variableLine; //считываемая строка с файла
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
     fileData var;
     bool varIsExist = false;
-    while (getline(file, variableLine)){ //проверяем все существующие переменные
+    while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         if (variableLine == " " || variableLine.empty()) continue;
-        var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-        var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-        if (var.name == name){ //если такая переменная существует
-            varIsExist = true; //закрываем защёлку
-            hashMap currVar = hMFromStr(var.data); //определяем реальную переменную этого Типа данных
+        var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+        var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+        if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+            varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+            hashMap currVar = hMFromStr(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
             currVar.del(key);
-            variableLine = var.name + ';' + strFromHM(currVar);//превращаем переменную в текст
+            variableLine = var.name + ';' + strFromHM(currVar);//РїСЂРµРІСЂР°С‰Р°РµРј РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С‚РµРєСЃС‚
             if (currVar.pairCount != 0){
                 tmpFile << variableLine << endl;
             }
@@ -131,20 +131,20 @@ void hashSetDel(const request& request){
 
 
 void hashSetGet(const request& request){
-//структура команды: Get имяТаблицы [ключ]
+//СЃС‚СЂСѓРєС‚СѓСЂР° РєРѕРјР°РЅРґС‹: Get РёРјСЏРўР°Р±Р»РёС†С‹ [РєР»СЋС‡]
     fstream file(request.file, ios::in);
     if (request.query.size == 2) {
         string name = request.query[1];
-        string variableLine; //считываемая строка с файла
+        string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
         fileData var;
         bool varIsExist = false;
-        while (getline(file, variableLine)){ //проверяем все существующие переменные
+        while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
             if (variableLine == " " || variableLine.empty()) continue;
-            var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-            var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-            if (var.name == name){ //если такая переменная существует
-                varIsExist = true; //закрываем защёлку
-                hashMap currVar = hMFromStr(var.data); //определяем реальную переменную этого Типа данных
+            var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+            var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+            if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+                varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+                hashMap currVar = hMFromStr(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
                 cout << currVar.Get() << endl;
             }
         }
@@ -155,16 +155,16 @@ void hashSetGet(const request& request){
     else if (request.query.size == 3){
         string name = request.query[1];
         string key = request.query[2];
-        string variableLine; //считываемая строка с файла
+        string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
         fileData var;
         bool varIsExist = false;
-        while (getline(file, variableLine)){ //проверяем все существующие переменные
+        while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
             if (variableLine == " " || variableLine.empty()) continue;
-            var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-            var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-            if (var.name == name){ //если такая переменная существует
-                varIsExist = true; //закрываем защёлку
-                hashMap currVar = hMFromStr(var.data); //определяем реальную переменную этого Типа данных
+            var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+            var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+            if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+                varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+                hashMap currVar = hMFromStr(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
                 if (currVar.pairCount == 0) cout << "this HashMap is empty" << endl;
                 else {
                     if (currVar.Get(key).key.empty()){

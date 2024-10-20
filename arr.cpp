@@ -23,9 +23,9 @@ void arr<T>::realoc(){
 template <typename T>
 void arr<T>::push_back(const T& value) {
     if (size >= capacity) {
-        realoc(); // Увеличиваем вместимость, если нужно
+        realoc(); // РЈРІРµР»РёС‡РёРІР°РµРј РІРјРµСЃС‚РёРјРѕСЃС‚СЊ, РµСЃР»Рё РЅСѓР¶РЅРѕ
     }
-    data[size++] = value; // Добавляем значение и увеличиваем размер
+    data[size++] = value; // Р”РѕР±Р°РІР»СЏРµРј Р·РЅР°С‡РµРЅРёРµ Рё СѓРІРµР»РёС‡РёРІР°РµРј СЂР°Р·РјРµСЂ
 }
 
 template <typename T>
@@ -55,7 +55,7 @@ void arr<T>::del(size_t index) {
         throw std::out_of_range("Index out of range");
     }
     for (size_t i = index; i < size - 1; ++i) {
-        data[i] = data[i + 1]; // Сдвигаем элементы влево
+        data[i] = data[i + 1]; // РЎРґРІРёРіР°РµРј СЌР»РµРјРµРЅС‚С‹ РІР»РµРІРѕ
     }
     size--;
 }

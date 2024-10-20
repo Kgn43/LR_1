@@ -13,10 +13,10 @@ public:
     listNode* next;
     listNode* previous;
 
-    //конструкторы
+    //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹
     listNode(T val, listNode* following, listNode* prev) : value(val), next(following), previous(prev) {}
     listNode(T val) : value(val), next(nullptr), previous(nullptr) {}
-    listNode() : value(T()), next(nullptr), previous(nullptr) {} //не уверен, но тут могут возникать ошибки, если нет конструктора по умолчанию для АТД
+    listNode() : value(T()), next(nullptr), previous(nullptr) {} //РЅРµ СѓРІРµСЂРµРЅ, РЅРѕ С‚СѓС‚ РјРѕРіСѓС‚ РІРѕР·РЅРёРєР°С‚СЊ РѕС€РёР±РєРё, РµСЃР»Рё РЅРµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ РђРўР”
 };
 
 
@@ -26,7 +26,7 @@ struct list{
     listNode<T>* first;
     listNode<T>* last;
 
-    //конструктор
+    //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
     list<T>(): first(nullptr), last(nullptr) {}
 
     void headInsert(T value);

@@ -2,29 +2,29 @@
 
 
 void printList(const request& request){
-    ifstream file(request.file, ios::in); //откуда читаем
-    string variableLine; //считываемая строка с файла
-    if (request.query.size == 1){ //вывести все переменные
+    ifstream file(request.file, ios::in); //РѕС‚РєСѓРґР° С‡РёС‚Р°РµРј
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
+    if (request.query.size == 1){ //РІС‹РІРµСЃС‚Рё РІСЃРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         fileData var;
-        while (getline(file, variableLine)) { //проверяем все существующие переменные
+        while (getline(file, variableLine)) { //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
             if (variableLine == " " || variableLine.empty()) continue;
-            var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-            var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-            list<string> currVar = splitToList(var.data); //определяем реальную переменную этого Типа данных
+            var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+            var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+            list<string> currVar = splitToList(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
             cout << var.name << " = " << currVar << endl;
         }
     }
-    else if (request.query.size == 2) { //вывести одну переменную
-        string name = request.query[1]; //имя искомой переменной
+    else if (request.query.size == 2) { //РІС‹РІРµСЃС‚Рё РѕРґРЅСѓ РїРµСЂРµРјРµРЅРЅСѓСЋ
+        string name = request.query[1]; //РёРјСЏ РёСЃРєРѕРјРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№
         fileData var;
         bool varIsExist = false;
-        while (getline(file, variableLine)){ //проверяем все существующие переменные
+        while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
             if (variableLine == " " || variableLine.empty()) continue;
-            var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-            var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-            if (var.name == name){ //если такая переменная существует
-                varIsExist = true; //закрываем защёлку
-                list<string> currVar = splitToList(var.data); //определяем реальную переменную этого Типа данных
+            var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+            var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+            if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+                varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+                list<string> currVar = splitToList(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
                 cout << var.name << " = " << currVar << endl;
             }
         }
@@ -40,7 +40,7 @@ void printList(const request& request){
 
 
 void listPush(const request& request){
-//структура команды: push имяСписка кудаЗаписать чтоЗаписать
+//СЃС‚СЂСѓРєС‚СѓСЂР° РєРѕРјР°РЅРґС‹: push РёРјСЏРЎРїРёСЃРєР° РєСѓРґР°Р—Р°РїРёСЃР°С‚СЊ С‡С‚РѕР—Р°РїРёСЃР°С‚СЊ
     fstream file(request.file, ios::in);
     fstream tmpFile("tmp.data", ios::out);
     if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
@@ -49,31 +49,31 @@ void listPush(const request& request){
         serr << "Wrong command syntax";
         throw runtime_error(serr.str());
     }
-    string name = request.query[1]; //имя списка
-    string place = request.query[2]; // начало/конец
+    string name = request.query[1]; //РёРјСЏ СЃРїРёСЃРєР°
+    string place = request.query[2]; // РЅР°С‡Р°Р»Рѕ/РєРѕРЅРµС†
     if (place != "begin" && place != "end"){
         stringstream serr;
         serr << "Wrong insert place";
         throw runtime_error(serr.str());
     }
-    string value = request.query[3]; //что записать
-    string variableLine; //считываемая строка с файла
+    string value = request.query[3]; //С‡С‚Рѕ Р·Р°РїРёСЃР°С‚СЊ
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
     fileData var;
     bool varIsExist = false;
-    while (getline(file, variableLine)){ //проверяем все существующие переменные
+    while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         if (variableLine == " " || variableLine.empty()) continue;
-        var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-        var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-        if (var.name == name){ //если такая переменная существует
-            varIsExist = true; //закрываем защёлку
-            list<string> currVar = splitToList(var.data); //определяем реальную переменную этого Типа данных
+        var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+        var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+        if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+            varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+            list<string> currVar = splitToList(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
             if (place == "begin"){
-                currVar.headInsert(value); //закидываем то, что просят в начало
+                currVar.headInsert(value); //Р·Р°РєРёРґС‹РІР°РµРј С‚Рѕ, С‡С‚Рѕ РїСЂРѕСЃСЏС‚ РІ РЅР°С‡Р°Р»Рѕ
             }
             else {
                 currVar.backInsert(value);
             }
-            variableLine = var.name + ';' + unSplitList(currVar);//превращаем переменную в текст
+            variableLine = var.name + ';' + unSplitList(currVar);//РїСЂРµРІСЂР°С‰Р°РµРј РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С‚РµРєСЃС‚
             //currVar.clear();
             tmpFile << variableLine << endl;
         }
@@ -83,9 +83,9 @@ void listPush(const request& request){
     }
     if (!varIsExist){
         cout << "making new list" << endl;
-        list<string> newVar;//да, делаем это всегда.
+        list<string> newVar;//РґР°, РґРµР»Р°РµРј СЌС‚Рѕ РІСЃРµРіРґР°.
         newVar.headInsert(value);
-        variableLine = name + ';' + unSplitList(newVar);//превращаем переменную в текст
+        variableLine = name + ';' + unSplitList(newVar);//РїСЂРµРІСЂР°С‰Р°РµРј РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С‚РµРєСЃС‚
         tmpFile << variableLine;
     }
     file.close();
@@ -101,7 +101,7 @@ void listPush(const request& request){
 
 
 void listDel(const request& request){
-//команда: pop имяСписка откуда/поКакомуЗначению
+//РєРѕРјР°РЅРґР°: pop РёРјСЏРЎРїРёСЃРєР° РѕС‚РєСѓРґР°/РїРѕРљР°РєРѕРјСѓР—РЅР°С‡РµРЅРёСЋ
     fstream file(request.file, ios::in);
     fstream tmpFile("tmp.data", ios::out);
     if(!tmpFile.is_open()) throw runtime_error("Tmp file doesn't exist");
@@ -112,16 +112,16 @@ void listDel(const request& request){
     }
     string name = request.query[1];
     string wh = request.query[2]; //what/where
-    string variableLine; //считываемая строка с файла
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
     fileData var;
     bool varIsExist = false;
-    while (getline(file, variableLine)){ //проверяем все существующие переменные
+    while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         if (variableLine == " " || variableLine.empty()) continue;
-        var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-        var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-        if (var.name == name){ //если такая переменная существует
-            varIsExist = true; //закрываем защёлку
-            list<string> currVar = splitToList(var.data); //определяем реальную переменную этого Типа данных
+        var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+        var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+        if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+            varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+            list<string> currVar = splitToList(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
             if (wh == "begin") {
                 currVar.delFirst();
             }
@@ -131,7 +131,7 @@ void listDel(const request& request){
             else {
                 currVar.delByVal(wh);
             }
-            variableLine = var.name + ';' + unSplitList(currVar);//превращаем переменную в текст
+            variableLine = var.name + ';' + unSplitList(currVar);//РїСЂРµРІСЂР°С‰Р°РµРј РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С‚РµРєСЃС‚
             //currVar.clear();
             if (currVar.first != nullptr){
                 tmpFile << variableLine << endl;
@@ -158,7 +158,7 @@ void listDel(const request& request){
 
 
 void listGet(const request& request){
-//структура команды: get имяСписка искомоеЗначение
+//СЃС‚СЂСѓРєС‚СѓСЂР° РєРѕРјР°РЅРґС‹: get РёРјСЏРЎРїРёСЃРєР° РёСЃРєРѕРјРѕРµР—РЅР°С‡РµРЅРёРµ
     fstream file(request.file, ios::in);
     if(!file.is_open()){
         stringstream serr;
@@ -170,18 +170,18 @@ void listGet(const request& request){
         serr << "Wrong command syntax";
         throw runtime_error(serr.str());
     }
-    string name = request.query[1]; //в каком списке искать
-    string value = request.query[2]; //что ищем
-    string variableLine; //считываемая строка с файла
+    string name = request.query[1]; //РІ РєР°РєРѕРј СЃРїРёСЃРєРµ РёСЃРєР°С‚СЊ
+    string value = request.query[2]; //С‡С‚Рѕ РёС‰РµРј
+    string variableLine; //СЃС‡РёС‚С‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР° СЃ С„Р°Р№Р»Р°
     fileData var;
     bool varIsExist = false;
-    while (getline(file, variableLine)){ //проверяем все существующие переменные
+    while (getline(file, variableLine)){ //РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
         if (variableLine == " " || variableLine.empty()) continue;
-        var.name = splitToArr(variableLine, ';')[0]; //определяем их имена
-        var.data = splitToArr(variableLine, ';')[1]; //и то, что они хранят
-        if (var.name == name){ //если такая переменная существует
-            varIsExist = true; //закрываем защёлку
-            list<string> currVar = splitToList(var.data); //определяем реальную переменную этого Типа данных
+        var.name = splitToArr(variableLine, ';')[0]; //РѕРїСЂРµРґРµР»СЏРµРј РёС… РёРјРµРЅР°
+        var.data = splitToArr(variableLine, ';')[1]; //Рё С‚Рѕ, С‡С‚Рѕ РѕРЅРё С…СЂР°РЅСЏС‚
+        if (var.name == name){ //РµСЃР»Рё С‚Р°РєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+            varIsExist = true; //Р·Р°РєСЂС‹РІР°РµРј Р·Р°С‰С‘Р»РєСѓ
+            list<string> currVar = splitToList(var.data); //РѕРїСЂРµРґРµР»СЏРµРј СЂРµР°Р»СЊРЅСѓСЋ РїРµСЂРµРјРµРЅРЅСѓСЋ СЌС‚РѕРіРѕ РўРёРїР° РґР°РЅРЅС‹С…
             if (currVar.find(value)){
                 cout << "value " << value << " is in the list " << name << endl;
             }
