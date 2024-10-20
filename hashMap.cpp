@@ -71,28 +71,28 @@ void hashMap::del(const string& key) {
     list<Pair> oneBucket = this->buckets[thisHash];
     listNode<Pair>* node = oneBucket.first;
     while(node != nullptr){
-        if (node->next == nullptr){ //остался один узел
+        if (node->next == nullptr){ //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
             delete node;
-            this->buckets[thisHash].first->next = nullptr;
-            this->buckets[thisHash].first->previous = nullptr;
+            this->buckets[thisHash].first = nullptr;
+            this->buckets[thisHash].last = nullptr;
             this->pairCount--;
             break;
         }
         if (node->value.key == key){
-            if (node->next != nullptr && node->previous != nullptr){ //удаляем не с краю
+            if (node->next != nullptr && node->previous != nullptr){ //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
                 node->next->previous = node->previous;
                 node->previous->next = node->next;
                 delete node;
                 this->pairCount--;
                 break;
             }
-            else if(node->next != nullptr){ //удалить первый узел
+            else if(node->next != nullptr){ //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 oneBucket.delFirst();
                 this->buckets[thisHash].first = this->buckets[thisHash].first->next;
                 this->pairCount--;
                 break;
             }
-            else { //удалить последний
+            else { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 oneBucket.delLast();
                 delete node;
                 this->pairCount--;
