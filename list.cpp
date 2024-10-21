@@ -32,7 +32,7 @@ void list<T>::headInsert(T value) {
 
 template<typename T>
 void list<T>::delLast() {
-    if (this->first->previous == nullptr){
+    if (this->first->next == nullptr){
         delete this->last;
         this->first = nullptr;
         this->last = nullptr;
@@ -47,7 +47,7 @@ void list<T>::delLast() {
 
 template<typename T>
 void list<T>::delFirst() {
-    if (this->first->next == nullptr){
+    if (this->last->previous == nullptr){
         delete this->first;
         this->first = nullptr;
         this->last = nullptr;
@@ -77,8 +77,10 @@ bool list<T>::find(T value) {
 template<typename T>
 void list<T>::delByVal(T val) {
     listNode<T> *tmp = first;
+    if (this->first.value == val) delFirst();
     while (tmp != nullptr){
         if (tmp->value == val){
+            if (tmp->next == nullptr) delLast();
             tmp->next->previous = tmp->previous;
             tmp->previous->next = tmp->next;
             delete tmp;

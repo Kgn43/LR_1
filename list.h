@@ -8,7 +8,6 @@ using namespace std;
 
 template <typename T>
 struct listNode {
-public:
     T value;
     listNode* next;
     listNode* previous;
